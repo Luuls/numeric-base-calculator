@@ -7,7 +7,7 @@
 #include <iostream>
 #include "Calculator.h"
 
-const int SIZE = 255;
+//TESTE: IGNORAR ESTE COMENTÁRIO
 
 int main() {
 
