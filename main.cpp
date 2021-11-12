@@ -1,12 +1,17 @@
+/*  CALCULADORA DE BASES NUMÉRICAS
+
+    Autor: Luan Moraes || luan134678@gmail.com
+    Criação: 10/11/2021
+*/
+
 #include <iostream>
 #include "Calculator.h"
 
 const int SIZE = 255;
 
 int main() {
-    Calculator calc;   //cria uma instância de Calculadora
 
-    std::cout << "               Calculadora de Bases Numericas!! " << std::endl;
+    std::cout << "               Calculadora de Bases Numericas! " << std::endl;
     std::cout << "==============================//==============================" << std::endl;
     std::cout << "Escolha a Base Numerica" << std::endl << "1 - Binario" << std::endl << "2 - Hexadecimal" << std::endl << "3 - Decimal" << std::endl << "4 - Octal" << std::endl;
 
@@ -27,6 +32,7 @@ int main() {
     std::string value;
     std::cin >> value;
 
+    Calculator calc;   //Instância de Calculator
     std::cout << "O numero convertido eh: ";
     switch (option) {
     case BIN:
