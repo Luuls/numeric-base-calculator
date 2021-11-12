@@ -1,4 +1,4 @@
-# Baic numeric base calculator to convert different bases
+# Basic numeric base calculator to convert different bases
 
 -CLI Interface
 
