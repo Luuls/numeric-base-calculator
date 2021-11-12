@@ -25,7 +25,7 @@ std::string Calculator::to_dec(std::string value, short int base) {
             if (value[i] < 'A') {
                 sum += (value[i] - '0') * int(pow(16, val_size - 1 - i));
             }
-            //se não, é uma letra, porque vem antes do char 'A'(A-F -> 10-15)
+            //se não, é uma letra, porque vem depois do char 'A'(A-F -> 10-15)
             else {
                 value[i] = toupper(value[i]);
                 sum += (value[i] - 'A' + 10) * int(pow(16, val_size - 1 - i));
@@ -34,6 +34,7 @@ std::string Calculator::to_dec(std::string value, short int base) {
         return std::to_string(sum);
 
     case DEC:   //usuário escolheu converter de decimal para...
+        ans = value;
         return value;
 
     case OCT:   //usuário escolheu converter de octal para...
@@ -55,17 +56,18 @@ std::string Calculator::to_oct(std::string value, short int base) {
         return "";
     }
 
-    int val_dec = std::stoi(value_str);
+    int dec_value = std::stoi(value_str);
     std::string new_value;
 
     //enquanto o tal valor for maior que zero ainda pode ser dividido
-    while (val_dec != 0) {
+    while (dec_value != 0) {
         //adiciona o resto da div. como um char no fim da string
-        new_value += std::to_string(val_dec % 8);
-        val_dec /= 8;
+        new_value += std::to_string(dec_value % 8);
+        dec_value /= 8;
     }
     //inverte a string, pois os dígitos são adicionados em ordem inversa
     reverse(new_value.begin(), new_value.end());
+    ans = new_value;
     return new_value;
 }
 
@@ -77,24 +79,26 @@ std::string Calculator::to_hex(std::string value, short int base) {
         return "";
     }
 
-    int val_dec = std::stoi(value_str);
-    std::string val_convertido;
+    int dec_value = std::stoi(value_str);
+    std::string new_value;
 
-    while (val_dec != 0) {
-        int rest = val_dec % 16;
+    while (dec_value != 0) {
+        int rest = dec_value % 16;
 
         //se resto é maior que 9, então é uma letra entre A-F
         if (rest > 9) {
-            val_convertido += char(rest - 10 + 'A');
+            new_value += char(rest - 10 + 'A');
         }
         //se não, é um número regular e apenas convertemos o resto para string
         else {
-            val_convertido += std::to_string(rest);
+            new_value += std::to_string(rest);
         }
-        val_dec /= 16;
+        dec_value /= 16;
     }
-    reverse(val_convertido.begin(), val_convertido.end());
-    return val_convertido;
+
+    reverse(new_value.begin(), new_value.end());
+    ans = new_value;
+    return new_value;
 }
 
 std::string Calculator::to_bin(std::string value, short int base) {
@@ -105,13 +109,13 @@ std::string Calculator::to_bin(std::string value, short int base) {
         return "";
     }
 
-    int val_dec = std::stoi(value_str);
+    int dec_value = std::stoi(value_str);
     std::string new_value;
     int new_val_size = 0; //contagem do tamanho da string desprezando espaços
     int i = 0; //reseta a cada 4 dígitos para dividir em blocos de 4
 
-    while (val_dec != 0) {
-        new_value += std::to_string(val_dec % 2);
+    while (dec_value != 0) {
+        new_value += std::to_string(dec_value % 2);
 
         ++i;
         if (i == 4) {
@@ -120,7 +124,7 @@ std::string Calculator::to_bin(std::string value, short int base) {
             i = 0;
         }
         ++new_val_size;
-        val_dec /= 2;
+        dec_value /= 2;
     }
     //se o tamanho da string não for divisível por 4, então preenchemos o último
     //bloco com zeros à esquerda para que fique com 4 dígitos
@@ -130,10 +134,11 @@ std::string Calculator::to_bin(std::string value, short int base) {
 
     //se não, então ela já possui blocos com exatos 4 dígitos cada. 
     //Apenas retiramos o último espaço com pop_back() 
-    //que remove o último elemento da string
     else {
         new_value.pop_back();
     }
+    
     reverse(new_value.begin(), new_value.end());
+    ans = new_value;
     return new_value;
 }
