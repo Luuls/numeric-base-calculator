@@ -1,6 +1,6 @@
 /*  CALCULADORA DE BASES NUMÉRICAS
 
-    Autor: Luan Moraes || luan134678@gmail.com
+    https://github.com/Luuls
     Criação: 10/11/2021
 */
 
